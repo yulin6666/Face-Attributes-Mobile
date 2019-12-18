@@ -4,11 +4,10 @@ import pickle
 from ratelimit import limits, sleep_and_retry
 from tqdm import tqdm
 
-from config import pickle_file
+from config import PARTLY_IMG_DIR,partly_pickle_file
 from utils_aip import get_face_attributes
 
 ONE_SECOND = 1
-dir = '/Users/yulin9/Documents/project/AI/dataset/CASIA-WebFace'
 
 @sleep_and_retry
 @limits(calls=2, period=ONE_SECOND)
@@ -17,20 +16,20 @@ def get_attr(fn):
 
 
 if __name__ == "__main__":
-    subjects = [d for d in os.listdir(dir) if os.path.isdir(os.path.join(dir, d))]
-    assert (len(subjects) == 10575), "Number of subjects is: {}!".format(len(subjects))
+    subjects = [d for d in os.listdir(PARTLY_IMG_DIR) if os.path.isdir(os.path.join(PARTLY_IMG_DIR, d))]
+    #assert (len(subjects) == 10575), "Number of subjects is: {}!".format(len(subjects))
 
     file_names = []
     for i in range(len(subjects)):
         sub = subjects[i]
-        folder = os.path.join(dir, sub)
+        folder = os.path.join(PARTLY_IMG_DIR, sub)
         files = [f for f in os.listdir(folder) if
                  os.path.isfile(os.path.join(folder, f)) and f.lower().endswith('.jpg')]
         for file in files:
             filename = os.path.join(folder, file)
             file_names.append({'filename': filename, 'class_id': i, 'subject': sub})
 
-    assert (len(file_names) == 494414), "Number of files is: {}!".format(len(file_names))
+    #assert (len(file_names) == 494414), "Number of files is: {}!".format(len(file_names))
 
     samples = []
     for item in tqdm(file_names):
@@ -49,7 +48,7 @@ if __name__ == "__main__":
 
     print('num_samples: ' + str(len(samples)))
 
-    with open(pickle_file, 'wb') as file:
+    with open(partly_pickle_file, 'wb') as file:
         save = {
             'samples': samples
         }
