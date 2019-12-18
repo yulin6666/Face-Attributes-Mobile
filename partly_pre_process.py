@@ -4,7 +4,7 @@ import pickle
 import cv2 as cv
 from tqdm import tqdm
 
-from config import PARTLY_IMG_DIR, partly_pickle_file, pickle_file_aligned
+from config import PARTLY_IMG_DIR, partly_pickle_file, partly_pickle_file_aligned
 from retinaface.detector import detect_faces
 from utils import ensure_folder, crop_image
 
@@ -38,12 +38,13 @@ if __name__ == "__main__":
     for item in tqdm(items):
         try:
             full_path = item['full_path']
+            print(full_path)
             img = cv.imread(full_path)
             bboxes, landmarks = detect_faces(img)
             idx = select_significant_face(bboxes)
             bbox = bboxes[idx]
             img = crop_image(img, bbox)
-            filename = full_path.replace('data/CASIA-WebFace/', '').replace('/', '_')
+            filename = full_path.replace('data/CASIA-WebFace-test/', '').replace('/', '_')
 
             item['filename'] = filename
             samples.append(item)
@@ -56,7 +57,7 @@ if __name__ == "__main__":
 
     print('num_samples: ' + str(len(samples)))
 
-    with open(pickle_file_aligned, 'wb') as file:
+    with open(partly_pickle_file_aligned, 'wb') as file:
         save = {
             'samples': samples
         }

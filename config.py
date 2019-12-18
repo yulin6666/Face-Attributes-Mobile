@@ -21,9 +21,10 @@ train_ratio = 0.9
 num_train = int(num_samples * train_ratio)
 DATA_DIR = 'data'
 IMG_DIR = '/Users/yulin9/Documents/project/AI/dataset/CASIA-WebFace'
-PARTLY_IMG_DIR = '/Users/yulin9/Documents/project/AI/dataset/CASIA-WebFace-test'
+PARTLY_IMG_DIR = 'data/CASIA-WebFace-test'
 pickle_file = DATA_DIR + '/' + 'CASIA-WebFace.pkl'
 partly_pickle_file = DATA_DIR + '/' + 'CASIA-WebFace-partly.pkl'
+partly_pickle_file_aligned = DATA_DIR + '/' + 'CASIA-WebFace--partly-aligned.pkl'
 pickle_file_aligned = DATA_DIR + '/' + 'CASIA-WebFace-aligned.pkl'
 
 # name_list = ['age', 'pitch', 'roll', 'yaw', 'beauty', 'expression', 'face_prob', 'face_shape', 'face_type',
