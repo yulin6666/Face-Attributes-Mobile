@@ -24,6 +24,8 @@ IMG_DIR = 'data/CASIA-WebFace'
 pickle_file = DATA_DIR + '/' + 'CASIA-WebFace.pkl'
 pickle_file_aligned = DATA_DIR + '/' + 'CASIA-WebFace-aligned.pkl'
 
+partly_num_samples = 1303
+partly_num_train = int(partly_num_samples * train_ratio)
 PARTLY_IMG_DIR = 'data/CASIA-WebFace-test'
 partly_pickle_file = DATA_DIR + '/' + 'CASIA-WebFace-partly.pkl'
 partly_pickle_file_aligned = DATA_DIR + '/' + 'CASIA-WebFace--partly-aligned.pkl'
